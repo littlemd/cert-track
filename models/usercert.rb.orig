@@ -1,0 +1,11 @@
+class UserCert
+  include DataMapper::Resource
+  property :id,          Serial
+  property :cert_id,     Integer, :required => true
+  property :account_id,  Integer, :required => true
+  property :lic_code,    String,  :required => false
+  property :completed,   Date,    :required => true
+  property :expires,     Date,    :required => true
+  belongs_to :cert
+  belongs_to :account
+end

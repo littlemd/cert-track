@@ -1,0 +1,37 @@
+- error = @usercert.errors.key?(:lic_code) && @usercert.errors[:lic_code].count > 0
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :lic_code, :class => 'control-label'
+  .controls
+    =f.text_field :lic_code, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:lic_code, :class => 'text-error') : pat(:example)
+- error = @usercert.errors.key?(:completed) && @usercert.errors[:completed].count > 0
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :completed, :class => 'control-label'
+  .controls
+    =f.text_field :completed, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:completed, :class => 'text-error') : pat(:example)
+- error = @usercert.errors.key?(:expires) && @usercert.errors[:expires].count > 0
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :expires, :class => 'control-label'
+  .controls
+    =f.text_field :expires, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:expires, :class => 'text-error') : pat(:example)
+- error = @usercert.errors.key?(:cert_id) && @usercert.errors[:cert_id].count > 0
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :cert_id, :class => 'control-label'
+  .controls
+    =f.text_field :cert_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:cert_id, :class => 'text-error') : pat(:example)
+- error = @usercert.errors.key?(:account_id) && @usercert.errors[:account_id].count > 0
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :account_id, :class => 'control-label'
+  .controls
+    =f.text_field :account_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:account_id, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:usercerts, :index), :class => 'btn btn-default'

@@ -1,0 +1,8 @@
+%ul.nav.nav-tabs
+  %li=link_to tag_icon(:list, pat(:list)), url(:usercerts, :index)
+  %li=link_to tag_icon(:plus, pat(:new)), url(:usercerts, :new)
+  %li.active=link_to tag_icon(:edit, pat(:edit)), url(:usercerts, :edit, :id => @usercert.id)
+
+.tabs-content
+  = form_for :usercert, url(:usercerts, :update, :id => @usercert.id), :method => :put, :class => 'form-horizontal' do |f|
+    =partial 'usercerts/form', :locals => { :f => f }

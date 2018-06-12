@@ -1,0 +1,17 @@
+- @title = @vendor.name
+#show
+  .vendor
+    .name= @vendor.name
+    %table
+      %tbody
+        %tr
+          %td Certification
+          %td Needed
+          %td Current
+        - @vendor.certs.each do |cert|
+          %tr
+            %td= cert.name
+            %td= cert.needed
+            %td= Usercert.count(:cert_id => cert.id, :expires.gt => Time.now.to_date)
+
+%p= link_to 'View all vendors', url_for(:vendors, :index)

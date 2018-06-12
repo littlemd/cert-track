@@ -1,0 +1,31 @@
+- error = @cert.errors.key?(:name) && @cert.errors[:name].count > 0
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :name, :class => 'control-label'
+  .controls
+    =f.text_field :name, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:name, :class => 'text-error') : pat(:example)
+- error = @cert.errors.key?(:needed) && @cert.errors[:needed].count > 0
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :needed, :class => 'control-label'
+  .controls
+    =f.text_field :needed, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:needed, :class => 'text-error') : pat(:example)
+- error = @cert.errors.key?(:duration) && @cert.errors[:duration].count > 0
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :duration, :class => 'control-label'
+  .controls
+    =f.text_field :duration, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:duration, :class => 'text-error') : pat(:example)
+- error = @cert.errors.key?(:vendor_id) && @cert.errors[:vendor_id].count > 0
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :vendor_id, :class => 'control-label'
+  .controls
+    =f.text_field :vendor_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:vendor_id, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:certs, :index), :class => 'btn btn-default'

@@ -1,0 +1,58 @@
+%ul.nav.nav-tabs
+  %li.active=link_to tag_icon(:list, pat(:list)), url(:usercerts, :index)
+  %li=link_to tag_icon(:plus, pat(:new)), url(:usercerts, :new)
+
+.tabs-content
+  %table#list.table.table-striped.table-hover.table-condensed
+    %thead
+      %tr
+        %th.header.list-menu
+          .dropdown
+            %a.list-menu-toggle.dropdown-toggle{:href => '#', :'data-toggle' => :dropdown}
+              =tag_icon :magic
+              %span.caret
+            %ul.list-menu.dropdown-menu{:role => :menu}
+              %li.list-menu-wrapper=link_to tag_icon('check-square-o', pat(:select_all)), '#', :id => 'select-all', :class => 'list-menu-link'
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('square-o', pat(:deselect_all)), '#', :id => 'deselect-all', :class => 'list-menu-link list-menu-link-disabled'
+              %li.list-menu-divider.divider
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('trash-o', pat(:delete_selected)), '#', :id => 'delete-selected', :class => 'list-menu-link list-menu-link-disabled'
+                .list-menu-popover-delete-selected.popover.right
+                  .arrow
+                  %h3.popover-title=pat(:delete_selected_title)
+                  .popover-content
+                    = form_tag url(:usercerts, :destroy_many), :method => :delete do
+                      =hidden_field_tag :usercert_ids, :'data-delete-many-ids' => true
+                      =submit_tag pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small'
+                      .btn.btn-default.btn-small.cancel=pat(:cancel)
+        %th.header= mat(:usercert, :id)
+        %th.header= mat(:usercert, :lic_code)
+        %th.header= mat(:usercert, :completed)
+        %th.header= mat(:usercert, :expires)
+        %th.header= mat(:usercert, :cert_id)
+        %th.header= mat(:usercert, :account_id)
+        %th.header.list-row-action-header
+
+    %tbody
+      -@usercerts.each do |usercert|
+        %tr.list-row
+          %td.list-column.list-selectable
+            =check_box_tag 'usercert_ids[]', :value => usercert.id, :class => 'list-selectable-checkbox'
+          %td.list-column=usercert.id
+          %td.list-column=usercert.lic_code
+          %td.list-column=usercert.completed
+          %td.list-column=usercert.expires
+          %td.list-column=usercert.cert_id
+          %td.list-column=usercert.account_id
+          %td.list-column.list-row-action
+            .list-row-action-wrapper
+              =link_to tag_icon(:edit), :href => url(:usercerts, :edit, :id => usercert.id), :rel => :tooltip, :title => "#{pat(:edit)} usercert", :class => 'list-row-action-wrapper-link'
+              =link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} usercert", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
+              .popover.list-row-action-popover-delete-one.left
+                .arrow
+                %h3.popover-title=pat(:delete, :model => "usercert")
+                .popover-content
+                  = form_tag url(:usercerts, :destroy, :id => usercert.id), :method => :delete do
+                    =submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
+                    .btn.btn-default.btn-small.cancel=pat(:cancel)

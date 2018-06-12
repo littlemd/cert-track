@@ -1,0 +1,19 @@
+!!! Strict
+%html
+  %head
+    %title
+      = [@title, "Cert-Track"].compact.join(" | ")
+    = stylesheet_link_tag 'normalize', 'application'
+    = javascript_include_tag 'jquery', 'application'
+    = yield_content :include
+    %body
+      #header
+        %h1= link_to 'Cert-Track', '/'
+        %ul.menu
+          %li= link_to 'Vendors', url_for(:vendors, :index)
+          %li= link_to 'Certs', url_for(:vendors, :index)
+          %li= link_to 'UserCerts', url_for(:vendors, :index)
+      #container
+        #main= yield
+      #footer
+        Copyright &copy 2018 Redapt
